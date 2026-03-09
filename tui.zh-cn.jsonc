@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+
+  // TUI 主题，留空使用默认主题
+  // 可选主题列表：https://opencode.ai/docs/zh-cn/themes/
+  "theme": "",
+
+  // 自定义快捷键，留空使用默认快捷键
+  // 完整配置说明：https://opencode.ai/docs/zh-cn/keybinds/
+  "keybinds": {}
+}

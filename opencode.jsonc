@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Primary model - uses OpenCode's built-in free model
+  // Can be replaced with your own model after getting started
+  "model": "opencode/big-pickle",
+
+  // Lightweight model for simple tasks (title generation, etc.)
+  "small_model": "opencode/gpt-5-nano",
+
+  // MCP Servers - all free
+  // Set "enabled": true to activate
+  // Or use the /mcps command in chat to enable/disable
+  "mcp": {
+    // context7: queries up-to-date official docs
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "enabled": false
+    },
+    // exa: web search
+    // Note: When using OpenCode's built-in model, this MCP is not needed.
+    // The built-in websearch tool already supports web search (powered by Exa AI).
+    // If you switch to other providers (e.g., Anthropic, OpenAI),
+    // the built-in websearch won't be available. Enable this MCP to restore web search capability.
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": false
+    },
+    // grep.app: search real code on GitHub
+    "grep-app": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": false
+    }
+  },
+
+  // Plugins
+  // opencode-dcp: auto-prunes obsolete tool outputs to reduce token usage
+  // Note: If switching to Anthropic Claude with a subscription plan,
+  // this may increase cache misses and deplete quota faster
+  "plugin": ["@tarquinen/opencode-dcp@latest"]
+}
