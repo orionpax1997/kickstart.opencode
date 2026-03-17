@@ -16,13 +16,13 @@
     "context7": {
       "type": "local",
       "command": ["npx", "-y", "@upstash/context7-mcp"],
-      "enabled": false
+      "enabled": true
     },
-    // exa: web search
-    // Note: When using OpenCode's built-in model, this MCP is not needed.
-    // The built-in websearch tool already supports web search (powered by Exa AI).
-    // If you switch to other providers (e.g., Anthropic, OpenAI),
-    // the built-in websearch won't be available. Enable this MCP to restore web search capability.
+     // exa: web search
+     // Note: When using OpenCode's built-in model, this MCP is not needed.
+     // The built-in websearch tool already supports web search (powered by Exa AI).
+     // If you switch to other providers (e.g., Anthropic, OpenAI) 
+     // and the built-in websearch is unavailable, enable this MCP to restore web search capability.
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp",
@@ -32,7 +32,7 @@
     "grep-app": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": false
+      "enabled": true
     }
   },
 

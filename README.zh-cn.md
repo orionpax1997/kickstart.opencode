@@ -284,8 +284,6 @@ kickstart 没有内置任何 skill，因为 skill 高度依赖具体项目和技
 
 `AGENTS.md` 是给 AI 读的全局指令文件，放在 `~/.config/opencode/AGENTS.md`，对所有项目生效。
 
-kickstart 没有内置 `AGENTS.md`，因为这里的内容高度个人化，不适合预设。
-
 **建议包含以下几类：**
 
 **语言偏好**

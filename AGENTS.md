@@ -1,0 +1,3 @@
+- Use websearch for general web search.
+- Use context7 to look up library and framework documentation.
+- Use grep-app to search real-world code examples on GitHub.

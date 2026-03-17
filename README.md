@@ -284,8 +284,6 @@ See [Skills docs](https://opencode.ai/docs/skills/) for how to create them.
 
 `AGENTS.md` is a global instruction file for AI, placed at `~/.config/opencode/AGENTS.md`, applies to all projects.
 
-kickstart doesn't include a built-in `AGENTS.md` because the content is highly personal and not suitable for presets.
-
 **Suggested content:**
 
 **Language preference**

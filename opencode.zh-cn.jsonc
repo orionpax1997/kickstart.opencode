@@ -16,13 +16,13 @@
     "context7": {
       "type": "local",
       "command": ["npx", "-y", "@upstash/context7-mcp"],
-      "enabled": false
+      "enabled": true
     },
     // exa: 联网搜索
     // 注意：使用 OpenCode 内置模型时，无需此 MCP，
     // 内置 websearch 工具已支持联网搜索（基于 Exa AI）。
-    // 如果你切换到其他提供商（如 Anthropic、OpenAI），
-    // 内置 websearch 不可用，启用此 MCP 来恢复联网搜索能力。
+    // 如果你切换到其他提供商（如 Anthropic、OpenAI）时，
+    // 内置 websearch 不可用的话，启用此 MCP 来恢复联网搜索能力。
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp",
@@ -32,7 +32,7 @@
     "grep-app": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": false
+      "enabled": true
     }
   },
 
