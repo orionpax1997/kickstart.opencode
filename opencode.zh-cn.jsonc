@@ -1,44 +1,26 @@
 {
-  "$schema": "https://opencode.ai/config.json",
+	"$schema": "https://opencode.ai/config.json",
 
-  // 主力模型 - 使用 OpenCode 内置免费模型
-  // 上手后可替换为自己的模型
-  "model": "opencode/big-pickle",
+	// 主力模型 - 使用 OpenCode 内置免费模型
+	// 上手后可替换为自己的模型
+	"model": "opencode/big-pickle",
 
-  // 轻量任务模型（标题生成等）
-  "small_model": "opencode/gpt-5-nano",
+	// 轻量任务模型（标题生成等）
+	"small_model": "opencode/gpt-5-nano",
 
-  // MCP 服务器 - 全部免费
-  // 设置 "enabled": true 启用
-  // 或在对话中使用 /mcps 命令启用或停用
-  "mcp": {
-    // context7: 查询最新官方文档
-    "context7": {
-      "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp"],
-      "enabled": true
-    },
-    // exa: 联网搜索
-    // 注意：使用 OpenCode 内置模型时，无需此 MCP，
-    // 内置 websearch 工具已支持联网搜索（基于 Exa AI）。
-    // 如果你切换到其他提供商（如 Anthropic、OpenAI）时，
-    // 内置 websearch 不可用的话，启用此 MCP 来恢复联网搜索能力。
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp",
-      "enabled": false
-    },
-    // grep.app: 在 GitHub 上搜索真实代码
-    "grep-app": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
-    }
-  },
+	// 插件
+	"plugin": [
+		// opencode-dcp: 自动清理过时的工具输出以减少 token 使用
+		// 注意：如果切换到 Anthropic Claude 订阅版，
+		// 这可能会增加缓存未命中并更快耗尽配额
+		"@tarquinen/opencode-dcp@latest",
 
-  // 插件
-  // opencode-dcp: 自动清理过时的工具输出以减少 token 使用
-  // 注意：如果切换到 Anthropic Claude 订阅版，
-  // 这可能会增加缓存未命中并更快耗尽配额
-  "plugin": ["@tarquinen/opencode-dcp@latest"]
+		// opencode-lazy-loader: 按需懒加载 skill 内嵌的 MCP 服务器
+		// skill 可以自带 MCP 服务器，无需在全局配置中注册
+		// 详见: https://github.com/orionpax1997/opencode-lazy-mcp
+		"@orionpax/opencode-lazy-mcp"
+	],
+
+	// MCP 服务器 - 可在此定义或嵌入 skill 中
+	// "mcp": {}
 }
