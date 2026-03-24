@@ -1,7 +1,6 @@
 ---
-name: grep-app
+name: lazy-mcp-grep-app
 description: "Search real-world code examples from GitHub repositories using grep.app"
-argument-hint: describe what code pattern or implementation you want to find (e.g., "React error boundary", "Express CORS setup", "Python async context manager")
 mcp:
   grep-app:
     type: remote

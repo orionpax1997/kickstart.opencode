@@ -1,3 +1,0 @@
-- 使用 websearch 进行一般网络搜索。
-- 使用 context7 查找库和框架文档。
-- 使用 grep-app 在 GitHub 上搜索真实代码示例。

@@ -1,7 +1,6 @@
 ---
-name: context7
+name: lazy-mcp-context7
 description: "Search up-to-date official library/framework documentation using Context7 MCP. Use when users ask about library APIs, framework configuration, setup steps, or code generation for a specific library."
-argument-hint: describe the library and what you need (e.g., "Next.js middleware auth setup", "React 19 server components", "Express rate limiting")
 mcp:
   context7:
     command: ["npx", "-y", "@upstash/context7-mcp"]
