@@ -31,11 +31,18 @@
 ├── opencode.zh-cn.jsonc    ← 核心配置中文版
 ├── tui.jsonc               ← TUI 配置
 ├── tui.zh-cn.jsonc         ← TUI 配置中文版
+├── installation.md         ← 安装指南（供 AI agent 使用）
 ├── agents/
 │   └── careful.md         ← 需要确认的 agent
-└── commands/
-    ├── plan.md            ← 创建计划命令
-    └── execute.md         ← 执行计划命令
+├── commands/
+│   ├── kickstart-config-mcp.md    ← 推荐并安装 MCP 服务器
+│   ├── kickstart-config-rule.md   ← 交互式生成 AGENTS.md
+│   └── kickstart-config-skill.md  ← 推荐并安装技能
+└── skills/
+    ├── lazy-mcp-context7/          ← 通过 Context7 MCP 搜索官方库/框架文档
+    ├── lazy-mcp-grep-app/          ← 从 GitHub 搜索真实代码示例
+    ├── kickstart-creator-skill/    ← 创建和改进技能
+    └── kickstart-creator-command/  ← 创建自定义斜杠命令
 ```
 
 ## 快速开始
@@ -161,110 +168,17 @@ agent: build
 可以执行 shell：!`git status`
 ```
 
-### /plan（内置示例）
+### /kickstart-config-mcp
 
-三阶段制定计划，结果保存到 `.opencode/plan.md`：
+根据项目技术栈推荐并安装 MCP 服务器。搜索 PulseMCP（12,000+ 服务器）和 MCP Market（20,000+ 服务器），展示对比表格，并自动创建 `lazy-mcp-` 前缀的 skill。
 
-1. **探索** - 用 read/grep 工具了解项目结构和相关文件，不问能从代码里找到答案的问题
-2. **访谈** - 用 `question` tool 弹出选项，询问方案选择、范围边界、验证方式
-3. **计划** - 生成任务列表，让用户确认后再执行
+### /kickstart-config-rule
 
-````markdown
----
-description: Create a step-by-step plan for a task and save it to .opencode/plan.md
-agent: build
----
+交互式 AGENTS.md 生成器。自动检测技术栈，询问语言偏好和工作风格，然后写入一个精简的 `AGENTS.md`（100 行以内），只包含 AI 无法从代码中发现的内容。
 
-First, check if `.opencode/plan.md` exists and has uncompleted tasks.
-If it does, use the `question` tool to ask the user:
-- "There is an existing unfinished plan. What would you like to do?"
-- Options: "Overwrite it" / "Continue with existing plan"
-- If continue: stop and suggest running `/execute` instead.
-- If overwrite: proceed.
+### /kickstart-config-skill
 
-## Phase 1: Explore
-
-Before asking any questions, explore the project to understand its structure and context.
-
-Use read, grep, and other read-only tools to:
-- Understand the project structure and tech stack
-- Find relevant files related to the user's request
-- Identify existing patterns and conventions
-- Discover constraints that affect the plan (e.g. existing abstractions, test setup, config)
-
-Do NOT ask questions that the codebase can already answer.
-
-## Phase 2: Interview
-
-Based on your exploration, use the `question` tool to clarify the following — but only
-ask what is genuinely unclear or has multiple valid answers:
-
-- **Ambiguities**: anything that could lead to wrong assumptions if left unclear
-- **Approach**: if there are multiple valid implementation approaches, let the user choose
-- **Scope**: what is explicitly out of scope for this task
-- **Verification**: does the project have tests? Should this task include tests? How should the result be verified?
-
-Do not ask questions the codebase already answered. Do not ask unnecessary questions.
-
-Wait for all answers before proceeding.
-
-## Phase 3: Plan
-
-Once all ambiguities are resolved, create a detailed plan and save it to `.opencode/plan.md`:
-
-# Plan: <task title>
-
-## Goal
-<one sentence description>
-
-## Tasks
-- [ ] <task 1>
-- [ ] <task 2>
-
-## Notes
-<decisions, constraints, assumptions>
-
-After saving, show the plan to the user and ask (using the `question` tool):
-- "Ready to execute?" Options: "Yes, run /execute" / "I want to adjust something"
-- If adjust: let the user describe the change, update the plan, ask again.
-- If yes: tell the user to run `/execute` when ready.
-
-**Do not proceed to execution.**
-````
-
-### /execute（内置示例）
-
-执行 `.opencode/plan.md` 中的计划：
-
-- 自动从第一个未完成任务继续（支持中断后 resume）
-- 每完成一个任务立即更新计划文件并报告
-- 遇到无法解决的问题时用 `question` tool 让用户选择处理方式
-- 全部完成后在计划顶部标记 ✅
-
-````markdown
----
-description: Execute the plan in .opencode/plan.md step by step
-agent: build
----
-
-Read `.opencode/plan.md`.
-
-If the file does not exist, tell the user to run `/plan` first and stop.
-
-Check if any tasks are already completed (checked off). If so, resume from the first
-unchecked task and tell the user which task you are resuming from.
-
-Execute each unchecked task in order:
-- Check off each task as you complete it by updating `.opencode/plan.md`
-- After completing each task, briefly report what was done
-- If you encounter an error you cannot resolve after 3 attempts, use the `question` tool to ask the user:
-  - "I'm stuck on: <task>. What would you like to do?"
-  - Options: "Skip this task" / "Abort and report the issue" / "I'll fix it manually, then continue"
-
-When all tasks are complete:
-- Mark the plan as done by adding `✅ Completed` at the top of `.opencode/plan.md`
-- Give the user a brief summary of what was accomplished
-````
+从 skills.sh 推荐并安装技能。搜索开放技能生态，根据项目技术栈推荐，支持全局或项目级安装。
 
 **自己创建 command 的思路：**
 
@@ -276,9 +190,18 @@ When all tasks are complete:
 
 Skills 是放在 `skills/` 目录下的 `SKILL.md` 文件，用来给 AI 注入特定领域的专业知识，比如某个框架的开发规范、项目特有的代码模式等。
 
-kickstart 没有内置任何 skill，因为 skill 高度依赖具体项目和技术栈，通用的 skill 意义不大。等你清楚自己项目的重复性需求之后，再按需添加。
+### 内置 Skills
 
-参考 [Skills 文档](https://opencode.ai/docs/zh-cn/skills/) 了解如何创建。
+| Skill | 说明 |
+| ----- | ---- |
+| **lazy-mcp-context7** | 通过 Context7 MCP 搜索最新的官方库/框架文档 |
+| **lazy-mcp-grep-app** | 从超过一百万个公共 GitHub 仓库中搜索真实代码示例 |
+| **kickstart-creator-skill** | 创建新技能、迭代改进、并优化技能描述 |
+| **kickstart-creator-command** | 创建自定义斜杠命令，含结构化模板和最佳实践 |
+
+Skills 会根据任务上下文自动加载。当你清楚自己项目的重复性需求之后，也可以按需添加项目专属的 skills。
+
+参考 [Skills 文档](https://opencode.ai/docs/skills/) 了解如何创建自己的 skill。
 
 ## AGENTS.md
 

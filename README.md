@@ -31,11 +31,18 @@ You get power, but you don't understand what's happening or why.
 ├── opencode.zh-cn.jsonc    ← Core config (Chinese)
 ├── tui.jsonc               ← TUI config
 ├── tui.zh-cn.jsonc         ← TUI config (Chinese)
+├── installation.md         ← Installation guide (for AI agents)
 ├── agents/
 │   └── careful.md         ← Agent that asks for confirmation
-└── commands/
-    ├── plan.md            ← Create a step-by-step plan
-    └── execute.md         ← Execute the plan step by step
+├── commands/
+│   ├── kickstart-config-mcp.md    ← Recommend and install MCP servers
+│   ├── kickstart-config-rule.md   ← Generate AGENTS.md interactively
+│   └── kickstart-config-skill.md  ← Recommend and install skills
+└── skills/
+    ├── lazy-mcp-context7/          ← Search official library/framework docs via Context7 MCP
+    ├── lazy-mcp-grep-app/          ← Search real-world code examples from GitHub
+    ├── kickstart-creator-skill/    ← Create and improve skills
+    └── kickstart-creator-command/  ← Create custom slash commands
 ```
 
 ## Quick start
@@ -161,110 +168,17 @@ Can reference files: @path/to/file
 Can run shell: !`git status`
 ```
 
-### /plan (built-in example)
+### /kickstart-config-mcp
 
-Three-phase planning, results saved to `.opencode/plan.md`:
+Recommend and install MCP servers based on your project's tech stack. Searches PulseMCP (12,000+ servers) and MCP Market (20,000+ servers), presents a comparison table, and auto-creates skills with `lazy-mcp-` prefix.
 
-1. **Explore** - Use read/grep tools to understand project structure, don't ask questions that can be answered from code
-2. **Interview** - Use `question` tool to ask about approach choices, scope boundaries, verification methods
-3. **Plan** - Generate task list, wait for user confirmation before execution
+### /kickstart-config-rule
 
-````markdown
----
-description: Create a step-by-step plan for a task and save it to .opencode/plan.md
-agent: build
----
+Interactive AGENTS.md generator. Auto-detects tech stack, asks about language preference and working style, then writes a minimal `AGENTS.md` (under 100 lines) containing only what the AI can't discover from code.
 
-First, check if `.opencode/plan.md` exists and has uncompleted tasks.
-If it does, use the `question` tool to ask the user:
-- "There is an existing unfinished plan. What would you like to do?"
-- Options: "Overwrite it" / "Continue with existing plan"
-- If continue: stop and suggest running `/execute` instead.
-- If overwrite: proceed.
+### /kickstart-config-skill
 
-## Phase 1: Explore
-
-Before asking any questions, explore the project to understand its structure and context.
-
-Use read, grep, and other read-only tools to:
-- Understand the project structure and tech stack
-- Find relevant files related to the user's request
-- Identify existing patterns and conventions
-- Discover constraints that affect the plan (e.g. existing abstractions, test setup, config)
-
-Do NOT ask questions that the codebase can already answer.
-
-## Phase 2: Interview
-
-Based on your exploration, use the `question` tool to clarify the following — but only
-ask what is genuinely unclear or has multiple valid answers:
-
-- **Ambiguities**: anything that could lead to wrong assumptions if left unclear
-- **Approach**: if there are multiple valid implementation approaches, let the user choose
-- **Scope**: what is explicitly out of scope for this task
-- **Verification**: does the project have tests? Should this task include tests? How should the result be verified?
-
-Do not ask questions the codebase already answered. Do not ask unnecessary questions.
-
-Wait for all answers before proceeding.
-
-## Phase 3: Plan
-
-Once all ambiguities are resolved, create a detailed plan and save it to `.opencode/plan.md`:
-
-# Plan: <task title>
-
-## Goal
-<one sentence description>
-
-## Tasks
-- [ ] <task 1>
-- [ ] <task 2>
-
-## Notes
-<decisions, constraints, assumptions>
-
-After saving, show the plan to the user and ask (using the `question` tool):
-- "Ready to execute?" Options: "Yes, run /execute" / "I want to adjust something"
-- If adjust: let the user describe the change, update the plan, ask again.
-- If yes: tell the user to run `/execute` when ready.
-
-**Do not proceed to execution.**
-````
-
-### /execute (built-in example)
-
-Execute the plan in `.opencode/plan.md`:
-
-- Automatically resumes from first unchecked task (supports interruption/resume)
-- Updates plan file immediately after each task and reports
-- Uses `question` tool when encountering unsolvable issues
-- Marks with ✅ at top when all complete
-
-````markdown
----
-description: Execute the plan in .opencode/plan.md step by step
-agent: build
----
-
-Read `.opencode/plan.md`.
-
-If the file does not exist, tell the user to run `/plan` first and stop.
-
-Check if any tasks are already completed (checked off). If so, resume from the first
-unchecked task and tell the user which task you are resuming from.
-
-Execute each unchecked task in order:
-- Check off each task as you complete it by updating `.opencode/plan.md`
-- After completing each task, briefly report what was done
-- If you encounter an error you cannot resolve after 3 attempts, use the `question` tool to ask the user:
-  - "I'm stuck on: <task>. What would you like to do?"
-  - Options: "Skip this task" / "Abort and report the issue" / "I'll fix it manually, then continue"
-
-When all tasks are complete:
-- Mark the plan as done by adding `✅ Completed` at the top of `.opencode/plan.md`
-- Give the user a brief summary of what was accomplished
-````
+Recommend and install skills from skills.sh based on your project's tech stack. Searches the open agent skills ecosystem and installs selected skills globally or per-project.
 
 **Creating your own commands:**
 
@@ -276,9 +190,18 @@ When all tasks are complete:
 
 Skills are `SKILL.md` files placed in the `skills/` directory that inject domain-specific knowledge into AI, such as framework development standards or project-specific code patterns.
 
-kickstart doesn't include any built-in skills because skills are highly project-specific. Generic skills have limited value. Add them when you understand your project's recurring needs.
+### Built-in skills
 
-See [Skills docs](https://opencode.ai/docs/skills/) for how to create them.
+| Skill | Description |
+| ----- | ----------- |
+| **lazy-mcp-context7** | Search up-to-date official library/framework documentation via Context7 MCP |
+| **lazy-mcp-grep-app** | Search real-world code examples from over a million public GitHub repositories |
+| **kickstart-creator-skill** | Create new skills, iteratively improve them, and optimize skill descriptions |
+| **kickstart-creator-command** | Create custom slash commands with proper structure and best practices |
+
+Skills are loaded automatically based on the task context. You can also add project-specific skills when you understand your project's recurring needs.
+
+See [Skills docs](https://opencode.ai/docs/skills/) for how to create your own.
 
 ## AGENTS.md
 
