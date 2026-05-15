@@ -41,7 +41,30 @@ git clone https://github.com/orionpax1997/kickstart.opencode $env:APPDATA\openco
 opencode
 ```
 
-That's it.
+> ⚠️ **superpowers note**: OpenCode silently ignores the superpowers plugin's `config` hook ([#1087](https://github.com/obra/superpowers/issues/1087), [#1492](https://github.com/obra/superpowers/issues/1492)). Skills are discovered via symlinks in `skills/` — do not remove them.
+
+## Step 4: Create superpowers Symlinks
+
+After Step 3, the superpowers plugin is installed and its skills directory exists in the cache. Now create symlinks:
+
+**macOS / Linux**
+```bash
+SKILLS_DIR=~/.cache/opencode/packages/superpowers@git+https:/github.com/obra/superpowers.git/node_modules/superpowers/skills
+for skill in brainstorming systematic-debugging test-driven-development verification-before-completion writing-plans requesting-code-review receiving-code-review finishing-a-development-branch dispatching-parallel-agents subagent-driven-development executing-plans using-git-worktrees using-superpowers writing-skills; do
+  ln -s "$SKILLS_DIR/$skill/SKILL.md" ~/.config/opencode/skills/$skill
+done
+```
+
+**Windows (PowerShell)**
+```powershell
+$skillsDir = "$env:LOCALAPPDATA\.cache\opencode\packages\superpowers@git+https:\github.com\obra\superpowers.git\node_modules\superpowers\skills"
+$targetDir = "$env:APPDATA\opencode\skills"
+@("brainstorming","systematic-debugging","test-driven-development","verification-before-completion","writing-plans","requesting-code-review","receiving-code-review","finishing-a-development-branch","dispatching-parallel-agents","subagent-driven-development","executing-plans","using-git-worktrees","using-superpowers","writing-skills") | ForEach-Object {
+  New-Item -ItemType SymbolicLink -Path "$targetDir\$_" -Target "$skillsDir\$_\SKILL.md" -Force
+}
+```
+
+> ⚠️ These symlinks must be created **after** the first `opencode` run. Skipping Step 4 means superpowers skills won't be discovered.
 
 ---
 

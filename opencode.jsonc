@@ -10,15 +10,13 @@
 
 	// Plugins
 	"plugin": [
-		// opencode-dcp: auto-prunes obsolete tool outputs to reduce token usage
-		// Note: If switching to Anthropic Claude with a subscription plan,
-		// this may increase cache misses and deplete quota faster
-		"@tarquinen/opencode-dcp@latest",
-
 		// opencode-lazy-loader: lazy-loads skill-embedded MCP servers on demand
 		// Skills can bundle their own MCP servers without global config
 		// See: https://github.com/orionpax1997/opencode-lazy-mcp
-		"@orionpax/opencode-lazy-mcp"
+		"@orionpax/opencode-lazy-mcp",
+
+		// superpowers: enhances brainstorming and problem-solving
+		"superpowers@git+https://github.com/obra/superpowers.git"
 	],
 
 	// MCP servers - defined here or embedded in skills

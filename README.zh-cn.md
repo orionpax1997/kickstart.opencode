@@ -39,11 +39,32 @@
 │   ├── kickstart-config-rule.md   ← 交互式生成 AGENTS.md
 │   └── kickstart-config-skill.md  ← 推荐并安装技能
 └── skills/
-    ├── lazy-mcp-context7/          ← 通过 Context7 MCP 搜索官方库/框架文档
+    ├── 14 个 superpowers 软链接（brainstorming、systematic-debugging、TDD 等）
+    ├── lazy-mcp-context7/          ← 搜索官方库/框架文档
     ├── lazy-mcp-grep-app/          ← 从 GitHub 搜索真实代码示例
-    ├── kickstart-creator-skill/    ← 创建和改进技能
+    ├── kickstart-creator-skill/    ← 创建和改进 skills
     └── kickstart-creator-command/  ← 创建自定义斜杠命令
 ```
+
+## 插件
+
+插件扩展 OpenCode 核心功能。定义在 `opencode.jsonc` 中。
+
+| 插件 | 用途 |
+|------|------|
+| **@orionpax/opencode-lazy-mcp** | 按需懒加载 skill 内嵌的 MCP 服务器 |
+| **superpowers** | 提供头脑风暴、调试、TDD、规划等技能。根据任务自动加载。详见下方 "Skills"。 |
+
+> ⚠️ **superpowers 软链接必需**: OpenCode 静默忽略 superpowers 插件的 `config` hook（[#1087](https://github.com/obra/superpowers/issues/1087), [#1492](https://github.com/obra/superpowers/issues/1492)）。首次运行 `opencode` 后，需要创建软链接：
+>
+> ```bash
+> SKILLS_DIR=~/.cache/opencode/packages/superpowers@git+https:/github.com/obra/superpowers.git/node_modules/superpowers/skills
+> for skill in brainstorming systematic-debugging test-driven-development verification-before-completion writing-plans requesting-code-review receiving-code-review finishing-a-development-branch dispatching-parallel-agents subagent-driven-development executing-plans using-git-worktrees using-superpowers writing-skills; do
+>   ln -s "$SKILLS_DIR/$skill/SKILL.md" ~/.config/opencode/skills/$skill
+> done
+> ```
+>
+> Windows 命令见 `installation.md`。不要删除这些软链接。
 
 ## 快速开始
 
@@ -191,6 +212,11 @@ agent: build
 Skills 是放在 `skills/` 目录下的 `SKILL.md` 文件，用来给 AI 注入特定领域的专业知识，比如某个框架的开发规范、项目特有的代码模式等。
 
 ### 内置 Skills
+
+**来自 superpowers**（`skills/` 下的软链接）：
+`brainstorming`, `systematic-debugging`, `test-driven-development`, `verification-before-completion`, `writing-plans`, `requesting-code-review`, `receiving-code-review`, `finishing-a-development-branch`, `dispatching-parallel-agents`, `subagent-driven-development`, `executing-plans`, `using-git-worktrees`, `using-superpowers`, `writing-skills`
+
+**本地定义的**（`skills/` 下的真实目录）：
 
 | Skill | 说明 |
 | ----- | ---- |

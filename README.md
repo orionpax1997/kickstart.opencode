@@ -39,11 +39,32 @@ You get power, but you don't understand what's happening or why.
 │   ├── kickstart-config-rule.md   ← Generate AGENTS.md interactively
 │   └── kickstart-config-skill.md  ← Recommend and install skills
 └── skills/
-    ├── lazy-mcp-context7/          ← Search official library/framework docs via Context7 MCP
-    ├── lazy-mcp-grep-app/          ← Search real-world code examples from GitHub
-    ├── kickstart-creator-skill/    ← Create and improve skills
-    └── kickstart-creator-command/  ← Create custom slash commands
+    ├── 14 superpowers symlinks (brainstorming, systematic-debugging, TDD, etc.)
+    ├── lazy-mcp-context7/         ← Search official lib/framework docs
+    ├── lazy-mcp-grep-app/         ← Search real-world code examples from GitHub
+    ├── kickstart-creator-skill/   ← Create and improve skills
+    └── kickstart-creator-command/ ← Create custom slash commands
 ```
+
+## Plugins
+
+Plugins extend OpenCode's core behavior. Defined in `opencode.jsonc`.
+
+| Plugin | Purpose |
+|--------|---------|
+| **@orionpax/opencode-lazy-mcp** | Lazy-loads skill-embedded MCP servers on demand |
+| **superpowers** | Skills for brainstorming, debugging, TDD, planning, and more. Auto-loads per-task. See "Skills" below. |
+
+> ⚠️ **superpowers symlinks required**: OpenCode silently ignores the superpowers plugin's `config` hook ([#1087](https://github.com/obra/superpowers/issues/1087), [#1492](https://github.com/obra/superpowers/issues/1492)). After your first `opencode` run, create symlinks:
+>
+> ```bash
+> SKILLS_DIR=~/.cache/opencode/packages/superpowers@git+https:/github.com/obra/superpowers.git/node_modules/superpowers/skills
+> for skill in brainstorming systematic-debugging test-driven-development verification-before-completion writing-plans requesting-code-review receiving-code-review finishing-a-development-branch dispatching-parallel-agents subagent-driven-development executing-plans using-git-worktrees using-superpowers writing-skills; do
+>   ln -s "$SKILLS_DIR/$skill/SKILL.md" ~/.config/opencode/skills/$skill
+> done
+> ```
+>
+> See `installation.md` for Windows commands. Do not remove these symlinks.
 
 ## Quick start
 
@@ -191,6 +212,11 @@ Recommend and install skills from skills.sh based on your project's tech stack. 
 Skills are `SKILL.md` files placed in the `skills/` directory that inject domain-specific knowledge into AI, such as framework development standards or project-specific code patterns.
 
 ### Built-in skills
+
+**From superpowers** (symlinks in `skills/`):
+`brainstorming`, `systematic-debugging`, `test-driven-development`, `verification-before-completion`, `writing-plans`, `requesting-code-review`, `receiving-code-review`, `finishing-a-development-branch`, `dispatching-parallel-agents`, `subagent-driven-development`, `executing-plans`, `using-git-worktrees`, `using-superpowers`, `writing-skills`
+
+**Locally defined** in `skills/`:
 
 | Skill | Description |
 | ----- | ----------- |

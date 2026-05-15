@@ -10,15 +10,13 @@
 
 	// 插件
 	"plugin": [
-		// opencode-dcp: 自动清理过时的工具输出以减少 token 使用
-		// 注意：如果切换到 Anthropic Claude 订阅版，
-		// 这可能会增加缓存未命中并更快耗尽配额
-		"@tarquinen/opencode-dcp@latest",
-
 		// opencode-lazy-loader: 按需懒加载 skill 内嵌的 MCP 服务器
 		// skill 可以自带 MCP 服务器，无需在全局配置中注册
 		// 详见: https://github.com/orionpax1997/opencode-lazy-mcp
-		"@orionpax/opencode-lazy-mcp"
+		"@orionpax/opencode-lazy-mcp",
+
+		// superpowers: 增强头脑风暴和问题解决能力
+		"superpowers@git+https://github.com/obra/superpowers.git"
 	],
 
 	// MCP 服务器 - 可在此定义或嵌入 skill 中
