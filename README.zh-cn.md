@@ -22,82 +22,6 @@
 - 你可以删除不需要的东西
 - 默认只使用免费的模型、插件和 MCP
 
-## 包含的内容
-
-```
-~/.config/opencode/
-│
-├── opencode.jsonc          ← 核心配置。从这里开始。每行都要读。
-├── opencode.zh-cn.jsonc    ← 核心配置中文版
-├── tui.jsonc               ← TUI 配置
-├── tui.zh-cn.jsonc         ← TUI 配置中文版
-├── installation.md         ← 安装指南（供 AI agent 使用）
-├── agents/
-│   ├── careful.md         ← 需要确认的 agent
-│   └── expert.md          ← 升级处理 agent
-├── commands/
-│   ├── kickstart-config-mcp.md    ← 推荐并安装 MCP 服务器
-│   ├── kickstart-config-rule.md   ← 交互式生成 AGENTS.md
-│   └── kickstart-config-skill.md  ← 推荐并安装技能
-└── skills/
-    ├── 14 个 superpowers 软链接（brainstorming、systematic-debugging、TDD 等）
-    ├── kickstart-creator-skill/    ← 创建和改进 skills
-    └── kickstart-creator-command/  ← 创建自定义斜杠命令
-```
-
-## 插件
-
-插件扩展 OpenCode 核心功能。定义在 `opencode.jsonc` 中。
-
-| 插件 | 用途 |
-|------|------|
-| **superpowers** | 提供头脑风暴、调试、TDD、规划等技能。根据任务自动加载。详见下方 "Skills"。 |
-
-## MCP
-
-MCP 服务器在 `opencode.jsonc` 中全局定义，所有会话都可使用。
-
-| MCP | 用途 |
-|-----|------|
-| **context7** | 查询最新的官方库/框架文档 |
-| **searchcode** | 搜索并分析公共 git 仓库 |
-
-> ⚠️ **superpowers 软链接必需**: OpenCode 静默忽略 superpowers 插件的 `config` hook（[#1087](https://github.com/obra/superpowers/issues/1087), [#1492](https://github.com/obra/superpowers/issues/1492)）。首次运行 `opencode` 后，需要创建软链接：
->
-> ```bash
-> SKILLS_DIR=~/.cache/opencode/packages/superpowers@git+https:/github.com/obra/superpowers.git/node_modules/superpowers/skills
-> for skill in brainstorming systematic-debugging test-driven-development verification-before-completion writing-plans requesting-code-review receiving-code-review finishing-a-development-branch dispatching-parallel-agents subagent-driven-development executing-plans using-git-worktrees using-superpowers writing-skills; do
->   ln -s "$SKILLS_DIR/$skill/SKILL.md" ~/.config/opencode/skills/$skill
-> done
-> ```
->
-> Windows 命令见 `installation.md`。不要删除这些软链接。
-
-## 快速开始
-
-**让 AI 帮你安装**（推荐）
-
-把以下提示词粘贴到你的 AI Agent（Claude Code、Cursor 等）：
-
-```
-Read the installation guide and follow it:
-https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/installation.md
-```
-
-**手动安装**
-
-> ⚠️ 如果 `~/.config/opencode/` 已有配置，请先备份。
-
-```bash
-git clone https://github.com/orionpax1997/kickstart.opencode ~/.config/opencode
-```
-
-然后启动 OpenCode：
-
-```bash
-opencode
-```
-
 ## 如何让它为你所用
 
 1. 从头到尾阅读 `README.md`
@@ -123,6 +47,169 @@ opencode
 | 适合       | 项目起步、学习     | 后期、重度使用 |
 
 一旦你理解了自己真正需要什么，可以升级到 oh-my-opencode。
+
+## 项目结构
+
+```
+~/.config/opencode/
+│
+├── opencode.jsonc          ← 核心配置。从这里开始。每行都要读。
+├── opencode.zh-cn.jsonc    ← 核心配置中文版
+├── tui.jsonc               ← TUI 配置
+├── tui.zh-cn.jsonc         ← TUI 配置中文版
+├── docs/
+│   ├── installation.md            ← 安装指南（供 OpenCode 使用）
+│   └── installation-superpowers.md  ← 安装 superpowers（项目级别，推荐）
+├── agents/
+│   ├── careful.md         ← 需要确认的 agent
+│   └── expert.md          ← 升级处理 agent
+├── commands/
+│   ├── kickstart-config-mcp.md    ← 推荐并安装 MCP 服务器
+│   ├── kickstart-config-rule.md   ← 交互式生成 AGENTS.md
+│   └── kickstart-config-skill.md  ← 推荐并安装技能
+└── skills/
+    ├── kickstart-creator-skill/    ← 创建和改进 skills
+    └── kickstart-creator-command/  ← 创建自定义斜杠命令
+```
+
+## 快速开始
+
+**让 AI 帮你安装**（推荐）
+
+把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation.md
+```
+
+**手动安装**
+
+> ⚠️ 如果 `~/.config/opencode/` 已有配置，请先备份。
+
+```bash
+git clone https://github.com/orionpax1997/kickstart.opencode ~/.config/opencode
+```
+
+然后启动 OpenCode：
+
+```bash
+opencode
+```
+
+## 插件
+
+插件扩展 OpenCode 核心功能。定义在 `opencode.jsonc` 中。
+
+### Superpowers
+
+提供头脑风暴、调试、TDD、规划等技能。根据任务自动加载。
+
+**建议安装到项目级别，不要全局安装。** 全局安装会在每个项目的每个会话都加载该插件，浪费 token 并引入不需要的行为。安装时把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-superpowers.md
+```
+
+项目专属指南包含需要添加到项目 `AGENTS.md` 的覆盖配置块。
+
+## Skills
+
+Skills 是放在 `skills/` 目录下的 `SKILL.md` 文件，用来给 AI 注入特定领域的专业知识，比如某个框架的开发规范、项目特有的代码模式等。
+
+### 内置 Skills
+
+| Skill | 说明 |
+| ----- | ---- |
+| **kickstart-creator-skill** | 创建新技能、迭代改进、并优化技能描述 |
+| **kickstart-creator-command** | 创建自定义斜杠命令，含结构化模板和最佳实践 |
+
+Skills 会根据任务上下文自动加载。当你清楚自己项目的重复性需求之后，也可以按需添加项目专属的 skills。
+
+参考 [Skills 文档](https://opencode.ai/docs/skills/) 了解如何创建自己的 skill。
+
+## MCP
+
+MCP 服务器在 `opencode.jsonc` 中全局定义，所有会话都可使用。
+
+| MCP | 用途 |
+|-----|------|
+| **context7** | 查询最新的官方库/框架文档 |
+| **searchcode** | 搜索并分析公共 git 仓库 |
+
+## AGENTS.md
+
+`AGENTS.md` 是给 AI 读的全局指令文件，放在 `~/.config/opencode/AGENTS.md`，对所有项目生效。
+
+**建议包含以下几类：**
+
+**语言偏好**
+```
+Reply in Chinese.
+```
+
+**MCP 使用提示**（让 AI 知道什么时候用哪个工具）
+```
+Use context7 to look up library and framework documentation.
+Use searchcode to search and analyze public git repositories.
+```
+
+**个人编码偏好**
+```
+Never use `any` type. Never use `@ts-ignore`.
+Prefer explicit types over type inference.
+```
+
+**做事风格**
+```
+Keep responses concise. No need to explain obvious steps.
+```
+
+全局 `AGENTS.md` 应该保持简短（10 行以内），只写真正适用于所有项目的内容。
+
+---
+
+项目级别的 `AGENTS.md` 放在项目根目录，描述具体的项目结构、技术栈、开发规范等。可以在 OpenCode 中运行 `/init` 让 AI 根据项目自动生成。
+
+## Commands
+
+在 `commands/` 目录下创建 `.md` 文件即可定义一个斜杠命令。用户在 TUI 输入 `/文件名` 即可触发。
+
+**Frontmatter 字段说明：**
+
+```markdown
+---
+# 显示在命令列表中的描述
+description: 描述这个命令做什么
+
+# 指定执行这个命令的 agent（可选，默认使用当前 agent）
+# 内置可用：build（全权限）、plan（只读）
+agent: build
+---
+
+这里是命令的指令内容，告诉 AI 要做什么。
+可以引用文件：@path/to/file
+可以执行 shell：!`git status`
+```
+
+### /kickstart-config-mcp
+
+根据项目技术栈推荐并安装 MCP 服务器。搜索 PulseMCP（12,000+ 服务器）和 MCP Market（20,000+ 服务器），展示对比表格，并将选中的服务器直接写入 `opencode.jsonc` 的 `mcp` 块。
+
+### /kickstart-config-rule
+
+交互式 AGENTS.md 生成器。自动检测技术栈，询问语言偏好和工作风格，然后写入一个精简的 `AGENTS.md`（100 行以内），只包含 AI 无法从代码中发现的内容。
+
+### /kickstart-config-skill
+
+从 skills.sh 推荐并安装技能。搜索开放技能生态，根据项目技术栈推荐，支持全局或项目级安装。
+
+**自己创建 command 的思路：**
+
+- 有重复的 code review 流程？写成命令，每次 `/review` 触发
+- 经常需要生成某种格式的文档？写成命令，带上模板
+- 需要固定的提交信息格式？写成命令，自动读 git diff 再生成
 
 ## Agents
 
@@ -174,97 +261,3 @@ oh-my-opencode 的[宣言](https://github.com/code-yeongyu/oh-my-openagent/blob/
 - 需要只读的代码审查 agent？设置 `write: deny` `edit: deny`
 - 需要专注某个领域的 agent？在 system prompt 里描述角色和关注点
 - 需要用特定模型的 agent？在 frontmatter 里加 `model: provider/model-id`
-
-## Commands
-
-在 `commands/` 目录下创建 `.md` 文件即可定义一个斜杠命令。用户在 TUI 输入 `/文件名` 即可触发。
-
-**Frontmatter 字段说明：**
-
-```markdown
----
-# 显示在命令列表中的描述
-description: 描述这个命令做什么
-
-# 指定执行这个命令的 agent（可选，默认使用当前 agent）
-# 内置可用：build（全权限）、plan（只读）
-agent: build
----
-
-这里是命令的指令内容，告诉 AI 要做什么。
-可以引用文件：@path/to/file
-可以执行 shell：!`git status`
-```
-
-### /kickstart-config-mcp
-
-根据项目技术栈推荐并安装 MCP 服务器。搜索 PulseMCP（12,000+ 服务器）和 MCP Market（20,000+ 服务器），展示对比表格，并将选中的服务器直接写入 `opencode.jsonc` 的 `mcp` 块。
-
-### /kickstart-config-rule
-
-交互式 AGENTS.md 生成器。自动检测技术栈，询问语言偏好和工作风格，然后写入一个精简的 `AGENTS.md`（100 行以内），只包含 AI 无法从代码中发现的内容。
-
-### /kickstart-config-skill
-
-从 skills.sh 推荐并安装技能。搜索开放技能生态，根据项目技术栈推荐，支持全局或项目级安装。
-
-**自己创建 command 的思路：**
-
-- 有重复的 code review 流程？写成命令，每次 `/review` 触发
-- 经常需要生成某种格式的文档？写成命令，带上模板
-- 需要固定的提交信息格式？写成命令，自动读 git diff 再生成
-
-## Skills
-
-Skills 是放在 `skills/` 目录下的 `SKILL.md` 文件，用来给 AI 注入特定领域的专业知识，比如某个框架的开发规范、项目特有的代码模式等。
-
-### 内置 Skills
-
-**来自 superpowers**（`skills/` 下的软链接）：
-`brainstorming`, `systematic-debugging`, `test-driven-development`, `verification-before-completion`, `writing-plans`, `requesting-code-review`, `receiving-code-review`, `finishing-a-development-branch`, `dispatching-parallel-agents`, `subagent-driven-development`, `executing-plans`, `using-git-worktrees`, `using-superpowers`, `writing-skills`
-
-**本地定义的**（`skills/` 下的真实目录）：
-
-| Skill | 说明 |
-| ----- | ---- |
-| **kickstart-creator-skill** | 创建新技能、迭代改进、并优化技能描述 |
-| **kickstart-creator-command** | 创建自定义斜杠命令，含结构化模板和最佳实践 |
-
-Skills 会根据任务上下文自动加载。当你清楚自己项目的重复性需求之后，也可以按需添加项目专属的 skills。
-
-参考 [Skills 文档](https://opencode.ai/docs/skills/) 了解如何创建自己的 skill。
-
-## AGENTS.md
-
-`AGENTS.md` 是给 AI 读的全局指令文件，放在 `~/.config/opencode/AGENTS.md`，对所有项目生效。
-
-**建议包含以下几类：**
-
-**语言偏好**
-```
-Reply in Chinese.
-```
-
-**MCP 使用提示**（让 AI 知道什么时候用哪个工具）
-```
-Use websearch for general web search.
-Use context7 to look up library and framework documentation.
-Use searchcode to search and analyze public git repositories.
-```
-
-**个人编码偏好**
-```
-Never use `any` type. Never use `@ts-ignore`.
-Prefer explicit types over type inference.
-```
-
-**做事风格**
-```
-Keep responses concise. No need to explain obvious steps.
-```
-
-全局 `AGENTS.md` 应该保持简短（10 行以内），只写真正适用于所有项目的内容。
-
----
-
-项目级别的 `AGENTS.md` 放在项目根目录，描述具体的项目结构、技术栈、开发规范等。可以在 OpenCode 中运行 `/init` 让 AI 根据项目自动生成。

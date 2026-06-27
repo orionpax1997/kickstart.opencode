@@ -6,13 +6,7 @@
 	"model": "opencode/big-pickle",
 
 	// Lightweight model for simple tasks (title generation, etc.)
-	"small_model": "opencode/gpt-5-nano",
-
-	// Plugins
-	"plugin": [
-		// superpowers: enhances brainstorming and problem-solving
-		"superpowers@git+https://github.com/obra/superpowers.git"
-	],
+	"small_model": "opencode/deepseek-v4-flash-free",
 
 	// MCP servers - defined here or embedded in skills
 	"mcp": {

@@ -6,13 +6,7 @@
 	"model": "opencode/big-pickle",
 
 	// 轻量任务模型（标题生成等）
-	"small_model": "opencode/gpt-5-nano",
-
-	// 插件
-	"plugin": [
-		// superpowers: 增强头脑风暴和问题解决能力
-		"superpowers@git+https://github.com/obra/superpowers.git"
-	],
+	"small_model": "opencode/deepseek-v4-flash-free",
 
 	// MCP 服务器 - 可在此定义或嵌入 skill 中
 	"mcp": {
