@@ -60,6 +60,7 @@
 ├── docs/
 │   ├── installation.md            ← 安装指南（供 OpenCode 使用）
 │   ├── installation-rtk.md        ← 安装 rtk（全局级别，推荐）
+│   ├── installation-codegraph.md  ← 安装 codegraph（项目级别，推荐）
 │   └── installation-superpowers.md  ← 安装 superpowers（项目级别，推荐）
 ├── agents/
 │   ├── careful.md         ← 需要确认的 agent
@@ -113,11 +114,22 @@ Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-rtk.md
 ```
 
+### codegraph
+
+[codegraph](https://github.com/colbymchenry/codegraph) 会把代码库预先索引成知识图谱，让 agent 一次查询就能拿到精确的上下文（调用链路、影响范围、相关符号），而不是逐个文件爬取。
+
+**建议项目级别安装，不要全局安装。** 项目级安装把 MCP server 配置和 `.codegraph/` 索引限定在明确启用的项目范围内。先 `cd` 进入项目目录，然后把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codegraph.md
+```
+
 ### Superpowers
 
 提供头脑风暴、调试、TDD、规划等技能。根据任务自动加载。
 
-**建议安装到项目级别，不要全局安装。** 全局安装会在每个项目的每个会话都加载该插件，浪费 token 并引入不需要的行为。安装时把以下提示词粘贴到 OpenCode：
+**建议安装到项目级别，不要全局安装。** 全局安装会在每个项目的每个会话都加载该插件，浪费 token 并引入不需要的行为。先 `cd` 进入项目目录，然后把以下提示词粘贴到 OpenCode：
 
 ```
 Read the installation guide and follow it:

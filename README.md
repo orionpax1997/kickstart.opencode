@@ -60,6 +60,7 @@ You can graduate to oh-my-opencode once you understand what you actually need.
 ├── docs/
 │   ├── installation.md            ← Installation guide (for OpenCode)
 │   ├── installation-rtk.md        ← Install rtk (global-level, recommended)
+│   ├── installation-codegraph.md  ← Install codegraph (project-level, recommended)
 │   └── installation-superpowers.md  ← Install superpowers (project-level, recommended)
 ├── agents/
 │   ├── careful.md         ← Agent that asks for confirmation
@@ -113,11 +114,22 @@ Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-rtk.md
 ```
 
+### codegraph
+
+[codegraph](https://github.com/colbymchenry/codegraph) pre-indexes your codebase as a knowledge graph, so the agent gets surgical context (call paths, blast radius, related symbols) in one query instead of crawling files.
+
+**Install at the project level, not globally.** Project-level install scopes the MCP server config and the `.codegraph/` index to projects that opt in. `cd` into the project directory first, then paste this prompt into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codegraph.md
+```
+
 ### Superpowers
 
 Skills for brainstorming, debugging, TDD, planning, and more. Auto-loads per-task.
 
-**Install at project level, not global.** Global install loads the plugin on every session in every project, wasting tokens and pulling in behavior you may not want. To install, paste this prompt into OpenCode:
+**Install at project level, not global.** Global install loads the plugin on every session in every project, wasting tokens and pulling in behavior you may not want. `cd` into the project directory first, then paste this prompt into OpenCode:
 
 ```
 Read the installation guide and follow it:
