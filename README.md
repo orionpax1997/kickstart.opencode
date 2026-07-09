@@ -59,6 +59,7 @@ You can graduate to oh-my-opencode once you understand what you actually need.
 ├── tui.zh-cn.jsonc         ← TUI config (Chinese)
 ├── docs/
 │   ├── installation.md            ← Installation guide (for OpenCode)
+│   ├── installation-rtk.md        ← Install rtk (global-level, recommended)
 │   └── installation-superpowers.md  ← Install superpowers (project-level, recommended)
 ├── agents/
 │   ├── careful.md         ← Agent that asks for confirmation
@@ -100,6 +101,17 @@ opencode
 ## Plugins
 
 Plugins extend OpenCode's core behavior. Defined in `opencode.jsonc`.
+
+### rtk
+
+[rtk](https://github.com/rtk-ai/rtk) transparently rewrites verbose shell commands (`git status`, `pnpm list`, `vitest`, `cargo test`, …) into a compact token-saving form.
+
+**Install globally.** A single global install covers all projects with no per-project setup. To install, paste this prompt into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-rtk.md
+```
 
 ### Superpowers
 

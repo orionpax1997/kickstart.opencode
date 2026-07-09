@@ -59,6 +59,7 @@
 ├── tui.zh-cn.jsonc         ← TUI 配置中文版
 ├── docs/
 │   ├── installation.md            ← 安装指南（供 OpenCode 使用）
+│   ├── installation-rtk.md        ← 安装 rtk（全局级别，推荐）
 │   └── installation-superpowers.md  ← 安装 superpowers（项目级别，推荐）
 ├── agents/
 │   ├── careful.md         ← 需要确认的 agent
@@ -100,6 +101,17 @@ opencode
 ## 插件
 
 插件扩展 OpenCode 核心功能。定义在 `opencode.jsonc` 中。
+
+### rtk
+
+[rtk](https://github.com/rtk-ai/rtk) 会透明地把冗长的 shell 命令（`git status`、`pnpm list`、`vitest`、`cargo test` 等）改写成节省 token 的紧凑形式。
+
+**建议全局安装。** 一次全局安装覆盖所有项目，无需逐项目配置。安装时把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-rtk.md
+```
 
 ### Superpowers
 
