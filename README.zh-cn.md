@@ -61,6 +61,7 @@
 │   ├── installation.md            ← 安装指南（供 OpenCode 使用）
 │   ├── installation-rtk.md        ← 安装 rtk（全局级别，推荐）
 │   ├── installation-codegraph.md  ← 安装 codegraph（项目级别，推荐）
+│   ├── installation-codebase-memory-mcp.md  ← 安装 codebase-memory-mcp（项目级别，推荐）
 │   └── installation-superpowers.md  ← 安装 superpowers（项目级别，推荐）
 ├── agents/
 │   ├── careful.md         ← 需要确认的 agent
@@ -124,6 +125,19 @@ https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/mai
 Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codegraph.md
 ```
+
+### codebase-memory-mcp
+
+[codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) 是一个独立的静态二进制，把代码库索引成持久化的 SQLite 知识图谱（支持 158 种语言、14 个 MCP 工具、毫秒级查询）。和 codegraph 类似，它让 agent 一次调用就能拿到结构化上下文，不必逐个文件爬取。
+
+**建议项目级别安装，不要全局安装。** 官方安装器会自动改写所有已检测到的 agent 配置；针对 kickstart.opencode，我们跳过自动配置，改为手动把 MCP server 接到具体项目上，这样只有明确启用的项目才承担索引成本。先 `cd` 进入项目目录，然后把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codebase-memory-mcp.md
+```
+
+项目专属指南会向项目的 `opencode.json` 写入一条 MCP 配置，并附带一段 AGENTS.md 配置块，让 agent 优先使用图谱工具（`search_graph`、`trace_path`、`get_code_snippet`、`query_graph`、`get_architecture`），而不是 grep/glob。
 
 ### Superpowers
 

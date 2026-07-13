@@ -61,6 +61,7 @@ You can graduate to oh-my-opencode once you understand what you actually need.
 │   ├── installation.md            ← Installation guide (for OpenCode)
 │   ├── installation-rtk.md        ← Install rtk (global-level, recommended)
 │   ├── installation-codegraph.md  ← Install codegraph (project-level, recommended)
+│   ├── installation-codebase-memory-mcp.md  ← Install codebase-memory-mcp (project-level, recommended)
 │   └── installation-superpowers.md  ← Install superpowers (project-level, recommended)
 ├── agents/
 │   ├── careful.md         ← Agent that asks for confirmation
@@ -124,6 +125,19 @@ https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/mai
 Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codegraph.md
 ```
+
+### codebase-memory-mcp
+
+[codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) ships as a single static binary that indexes the codebase into a persistent SQLite-backed knowledge graph (158 languages, 14 MCP tools, sub-millisecond queries). Like codegraph, it gives the agent structural context in one call instead of crawling files.
+
+**Install at the project level, not globally.** The official installer auto-configures every detected agent; for kickstart.opencode we skip that and wire the MCP server per-project so only projects that opt in pay the index cost. `cd` into the project directory first, then paste this prompt into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codebase-memory-mcp.md
+```
+
+The project-specific guide adds an MCP entry to the project's `opencode.json` and an AGENTS.md block that tells the agent to prefer graph tools (`search_graph`, `trace_path`, `get_code_snippet`, `query_graph`, `get_architecture`) over grep/glob.
 
 ### Superpowers
 
