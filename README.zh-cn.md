@@ -294,6 +294,29 @@ permission:
 
 oh-my-opencode 的[宣言](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/manifesto.md)认为，需要人工干预本质上是系统的失败信号——理想状态下，你只需描述意图，剩下的全部交给 AI。`careful` 是为还没到那一步的现在设计的：在你还不完全信任 AI 判断的阶段，用确认机制来把关。随着模型能力的提升和你对 AI 的信任积累，你可能会发现自己越来越少切换到 `careful`，最终直接放手让它跑。
 
+### expert（升级处理 agent）
+
+`expert` 是一个子代理，作为显式升级的目标使用。它和 `build` 拥有相同的工具集，但运行在独立模型上并具备最大权限。这样当某个子代理陷入循环、或用户主动接手时，可以把一个 `BLOCKED` 的任务连同 `fix_hint` 一起交给它，让它在不重启的前提下重新尝试。
+
+```markdown
+---
+description: Escalation agent. Same as build but with maximum permissions and independent model configuration. Invoke ONLY via explicit subagent_type: expert, manual switch (Shift+Tab), or Orchestrator escalation when a task is BLOCKED.
+mode: all
+model: opencode/big-pickle
+---
+```
+
+**何时调用它**
+
+- **手动切换** — 在 TUI 中按 Shift+Tab 切换到 `expert` 直接对话。典型场景：头脑风暴、制定计划、设定任务目标——你想用更强模型的推理能力，但又不希望占用子代理槽位去做实际实现。
+- **子代理升级** — 其他代理（通常是实现了 superpowers `BLOCKED` 模式的 Orchestrator）通过 `task` 工具以 `subagent_type: expert` 调用，并附带说明问题所在的 `fix_hint`。
+- **显式指令** — 用户消息里点名 `expert` 或要求升级。
+
+**何时不要调用它**
+
+- 常规的多步骤任务。这部分应交给内置的 `general` 任务代理。
+- 当作"更强的 build"使用。`expert` 不是默认工作者，它的 description 限制了自动选择，父模型不应把日常任务路由给它。
+
 **自己创建 agent 的思路：**
 
 - 需要只读的代码审查 agent？设置 `write: deny` `edit: deny`

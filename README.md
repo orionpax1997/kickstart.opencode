@@ -294,6 +294,29 @@ permission:
 
 The [manifesto](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/manifesto.md) from oh-my-opencode argues that requiring human intervention is essentially a sign of system failure — ideally, you just describe your intent and let AI handle the rest. `careful` is designed for the "not yet" phase: when you don't fully trust AI's judgment yet, use confirmation as a checkpoint. As models improve and your trust builds, you may find yourself switching to `careful` less and less, eventually letting it run freely.
 
+### expert (escalation agent)
+
+`expert` is a subagent used as an explicit escalation target. It shares build's toolset but runs on its own model with maximum permissions, so the caller (a subagent stuck in a loop, or the user directly) can hand off a `BLOCKED` task with a `fix_hint` and get a fresh attempt without restarting.
+
+```markdown
+---
+description: Escalation agent. Same as build but with maximum permissions and independent model configuration. Invoke ONLY via explicit subagent_type: expert, manual switch (Shift+Tab), or Orchestrator escalation when a task is BLOCKED.
+mode: all
+model: opencode/big-pickle
+---
+```
+
+**When to invoke it**
+
+- **Manual switch** — press Shift+Tab in the TUI to switch to `expert` and chat with it directly. Typical use: brainstorming, planning, and setting task goals, where you want a stronger model's reasoning without burning a subagent slot on the actual implementation.
+- **Subagent escalation** — another agent (typically an Orchestrator implementing the superpowers `BLOCKED` pattern) calls the `task` tool with `subagent_type: expert` and a `fix_hint` describing what went wrong.
+- **Explicit instruction** — the user message names `expert` or asks for escalation.
+
+**When NOT to invoke it**
+
+- Routine multi-step work. That belongs to the built-in `general` task agent.
+- As a "more powerful build". `expert` is not a default worker; its description gates auto-selection, and the parent model should not route everyday tasks to it.
+
 **Creating your own agents:**
 
 - Need a read-only code review agent? Set `write: deny` `edit: deny`
