@@ -132,6 +132,17 @@ Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-superpowers.md
 ```
 
+### OpenSpec
+
+[OpenSpec](https://github.com/Fission-AI/OpenSpec) is a spec-driven development tool for generating and managing project specifications.
+
+**Install at the project level.** `cd` into the project directory first, then paste this into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-openspec.md
+```
+
 ## MCPs
 
 See [MCP docs](https://opencode.ai/docs/mcp-servers/) for how MCP servers work. The two below are built-in and available in every session by default:

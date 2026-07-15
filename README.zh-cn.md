@@ -132,6 +132,17 @@ Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-superpowers.md
 ```
 
+### OpenSpec
+
+[OpenSpec](https://github.com/Fission-AI/OpenSpec) 是 spec 驱动的开发工具，用于生成和管理项目规范。
+
+**建议项目级别安装。** 先 `cd` 进入项目目录，然后把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-openspec.md
+```
+
 ## MCP
 
 参考 [MCP 文档](https://opencode.ai/docs/zh-cn/mcp-servers/) 了解 MCP 服务器的工作方式。以下两个是内置的，默认在所有会话中可用：
