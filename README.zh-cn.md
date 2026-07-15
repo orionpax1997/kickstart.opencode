@@ -169,14 +169,7 @@ https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/mai
 
 参考 [Skills 文档](https://opencode.ai/docs/zh-cn/skills/) 了解如何创建自己的 skill。Skills 是放在 `skills/` 目录下的 `SKILL.md` 文件，用来给 AI 注入特定领域的专业知识，比如某个框架的开发规范、项目特有的代码模式等。
 
-### 内置 Skills
-
-| Skill | 说明 |
-| ----- | ---- |
-| **kickstart-creator-skill** | 创建新技能、迭代改进、并优化技能描述 |
-| **kickstart-creator-command** | 创建自定义斜杠命令，含结构化模板和最佳实践 |
-
-Skills 会根据任务上下文自动加载。当你清楚自己项目的重复性需求之后，也可以按需添加项目专属的 skills。
+Skills 会根据任务上下文自动加载。当你清楚自己项目的重复性需求之后，也可以按需添加项目专属的 skills。可以去 [skills.sh](https://skills.sh/) 发现社区 skills。
 
 **Frontmatter 字段说明：**
 
@@ -189,6 +182,35 @@ description: 描述这个 skill 做什么
 ---
 
 这里是 skill 的指令内容，告诉 AI 做什么以及在什么情况下使用。
+```
+
+### 内置 Skills
+
+| Skill | 说明 |
+| ----- | ---- |
+| **kickstart-creator-skill** | 创建新技能、迭代改进、并优化技能描述 |
+| **kickstart-creator-command** | 创建自定义斜杠命令，含结构化模板和最佳实践 |
+
+### agent-browser
+
+[agent-browser](https://github.com/vercel-labs/agent-browser) 通过 CDP（Chrome DevTools Protocol）让 agent 控制浏览器，比传统无头浏览器方案更省 token。
+
+**建议项目级别安装。** 先 `cd` 进入项目目录，然后把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-agent-browser.md
+```
+
+### caveman
+
+[caveman](https://github.com/juliusbrussee/caveman) 是极致压缩的沟通模式，节省约 75% token 的同时保留技术准确性。
+
+**建议项目级别安装。** 先 `cd` 进入项目目录，然后把以下提示词粘贴到 OpenCode：
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-caveman.md
 ```
 
 ## Commands

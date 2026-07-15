@@ -169,14 +169,7 @@ https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/mai
 
 See [Skills docs](https://opencode.ai/docs/skills/) for how to create your own. Skills are `SKILL.md` files placed in the `skills/` directory that inject domain-specific knowledge into AI — framework conventions, project-specific patterns, etc.
 
-### Built-in skills
-
-| Skill | Description |
-| ----- | ----------- |
-| **kickstart-creator-skill** | Create new skills, iteratively improve them, and optimize skill descriptions |
-| **kickstart-creator-command** | Create custom slash commands with proper structure and best practices |
-
-Skills are loaded automatically based on the task context. Add project-specific skills once you recognize recurring needs.
+Skills are loaded automatically based on the task context. Add project-specific skills once you recognize recurring needs. Browse [skills.sh](https://skills.sh/) to discover community skills.
 
 **Frontmatter fields:**
 
@@ -189,6 +182,35 @@ description: What this skill does
 ---
 
 Skill instructions go here. Tell the AI what to do and when to use this skill.
+```
+
+### Built-in skills
+
+| Skill | Description |
+| ----- | ----------- |
+| **kickstart-creator-skill** | Create new skills, iteratively improve them, and optimize skill descriptions |
+| **kickstart-creator-command** | Create custom slash commands with proper structure and best practices |
+
+### agent-browser
+
+[agent-browser](https://github.com/vercel-labs/agent-browser) lets the agent control a browser via CDP (Chrome DevTools Protocol) — more token-efficient than traditional headless browser approaches.
+
+**Install at the project level.** `cd` into the project directory first, then paste this into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-agent-browser.md
+```
+
+### caveman
+
+[caveman](https://github.com/juliusbrussee/caveman) is an ultra-compressed communication mode that cuts token usage ~75% while preserving technical accuracy.
+
+**Install at the project level.** `cd` into the project directory first, then paste this into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-caveman.md
 ```
 
 ## Commands
