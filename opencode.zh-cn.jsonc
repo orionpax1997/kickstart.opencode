@@ -8,6 +8,21 @@
 	// 轻量任务模型（标题生成等）
 	"small_model": "opencode/deepseek-v4-flash-free",
 
+	// Agent 配置
+	"agent": {
+		// 子代理执行 task 通常使用该 Agent。
+		// 使用 SDD 驱动开发时，主力模型制定完善的目标后，可以使用中档模型去干活。
+		"general": {
+			"mode": "subagent",
+			"model": "opencode/big-pickle"
+		},
+		// 探索任务比较浪费 token，使用上下文大，但是便宜的模型。
+		"explore": {
+			"mode": "subagent",
+			"model": "opencode/deepseek-v4-flash-free"
+		}
+	},
+
 	// MCP 服务器 - 可在此定义或嵌入 skill 中
 	"mcp": {
 		// context7: 查询最新的库文档和代码示例

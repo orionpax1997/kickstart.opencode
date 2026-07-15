@@ -8,6 +8,23 @@
 	// Lightweight model for simple tasks (title generation, etc.)
 	"small_model": "opencode/deepseek-v4-flash-free",
 
+	// Agent configurations
+	"agent": {
+		// Sub-agent for executing tasks.
+		// When using SDD (Specification-Driven Development), after the primary model
+		// defines the goals, a mid-tier model can carry out the work.
+		// Typically uses opencode/big-pickle
+		"general": {
+			"mode": "subagent",
+			"model": "opencode/big-pickle"
+		},
+		// Exploration tasks: token-heavy with large context windows; use a cheap model.
+		"explore": {
+			"mode": "subagent",
+			"model": "opencode/deepseek-v4-flash-free"
+		}
+	},
+
 	// MCP servers - defined here or embedded in skills
 	"mcp": {
 		// context7: query up-to-date library docs and code examples
