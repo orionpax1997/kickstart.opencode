@@ -77,7 +77,10 @@ opencode
 │   ├── installation-rtk.md        ← Install rtk (global-level, recommended)
 │   ├── installation-codegraph.md  ← Install codegraph (project-level, recommended)
 │   ├── installation-codebase-memory-mcp.md  ← Install codebase-memory-mcp (project-level, recommended)
-│   └── installation-superpowers.md  ← Install superpowers (project-level, recommended)
+│   ├── installation-superpowers.md  ← Install superpowers (project-level, recommended)
+│   ├── installation-openspec.md   ← Install OpenSpec (project-level, recommended)
+│   ├── installation-agent-browser.md  ← Install agent-browser (project-level)
+│   └── installation-caveman.md    ← Install caveman (project-level)
 ├── agents/
 │   ├── careful.md         ← Agent that asks for confirmation
 │   └── expert.md          ← Escalation agent
@@ -94,9 +97,11 @@ opencode
 
 1. **Read `README.md` from top to bottom** — understand the philosophy and what's available.
 2. **Read `opencode.jsonc` line by line** — it's annotated. Every config decision is explained.
-3. **Set up `AGENTS.md`** — add your language preference, working style, and coding conventions (see [AGENTS.md](#agentsmd) section for suggested content).
-4. **Install plugins you need** — start with `rtk` (token savings), then add project-level tools as needed (see [Plugins](#plugins) section).
-5. **Create agents and commands** as your workflow grows — you'll know when you need them.
+3. **Install plugins you need** — start with `rtk` (token savings), then add superpowers or OpenSpec as needed (see [Plugins](#plugins) section).
+4. **Install MCPs you need** — codegraph and codebase-memory-mcp provide codebase context (see [MCPs](#mcps) section).
+5. **Install skills you need** — agent-browser for browser automation, caveman for token compression, or browse [skills.sh](https://skills.sh/) (see [Skills](#skills) section).
+6. **Configure `AGENTS.md`** — add your language preference, working style, and coding conventions (see [AGENTS.md](#agentsmd) section for suggested content).
+7. **Create commands and agents** as your workflow grows — you'll know when you need them.
 
 Delete anything you don't use. It's a starting point, not a framework.
 

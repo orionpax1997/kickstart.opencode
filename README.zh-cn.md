@@ -77,7 +77,10 @@ opencode
 │   ├── installation-rtk.md        ← 安装 rtk（全局级别，推荐）
 │   ├── installation-codegraph.md  ← 安装 codegraph（项目级别，推荐）
 │   ├── installation-codebase-memory-mcp.md  ← 安装 codebase-memory-mcp（项目级别，推荐）
-│   └── installation-superpowers.md  ← 安装 superpowers（项目级别，推荐）
+│   ├── installation-superpowers.md  ← 安装 superpowers（项目级别，推荐）
+│   ├── installation-openspec.md   ← 安装 OpenSpec（项目级别，推荐）
+│   ├── installation-agent-browser.md  ← 安装 agent-browser（项目级别）
+│   └── installation-caveman.md    ← 安装 caveman（项目级别）
 ├── agents/
 │   ├── careful.md         ← 需要确认的 agent
 │   └── expert.md          ← 升级处理 agent
@@ -94,9 +97,11 @@ opencode
 
 1. **从头到尾阅读 `README.md`** — 理解设计理念，知道有哪些东西可用。
 2. **逐行阅读 `opencode.jsonc`** — 它有注解，每个配置决策都有解释。
-3. **创建 `AGENTS.md`** — 加上你的语言偏好、做事风格和编码规范（参考下方 [AGENTS.md](#agentsmd) 章节的建议内容）。
-4. **安装你需要的插件** — 从 `rtk`（节省 token）开始，再按需添加项目级工具（参考 [插件](#插件) 章节）。
-5. **按需创建 agents 和 commands** — 随着工作流增长，你会知道什么时候需要它们。
+3. **安装你需要的插件** — 从 `rtk`（节省 token）开始，再按需添加 superpowers 或 OpenSpec（参考 [插件](#插件) 章节）。
+4. **安装你需要的 MCP** — codegraph 和 codebase-memory-mcp 提供代码库上下文（参考 [MCP](#mcp) 章节）。
+5. **安装你需要的 skills** — agent-browser 做浏览器自动化，caveman 压缩 token，或去 [skills.sh](https://skills.sh/) 发现更多（参考 [Skills](#skills) 章节）。
+6. **配置 `AGENTS.md`** — 加上你的语言偏好、做事风格和编码规范（参考 [AGENTS.md](#agentsmd) 章节的建议内容）。
+7. **按需创建 commands 和 agents** — 随着工作流增长，你会知道什么时候需要它们。
 
 删掉你不用的东西。这是起点，不是框架。
 
