@@ -1,7 +1,7 @@
 
 > A well-commented, ready-to-use OpenCode configuration starter that helps you actually understand what's happening.
 
-Inspired by [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) and [oh-my-opencode](https://github.com/code-yeongyu/oh-my-openagent).
+Inspired by [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) and [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent).
 
 <div align="center">
 
@@ -9,9 +9,24 @@ Inspired by [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) and [oh
 
 </div>
 
+## Table of contents
+
+- [Philosophy](#philosophy)
+- [Quick start](#quick-start)
+- [Project structure](#project-structure)
+- [How to make it yours](#how-to-make-it-yours)
+- [What this is NOT](#what-this-is-not)
+- [Plugins](#plugins)
+- [MCPs](#mcps)
+- [Skills](#skills)
+- [Commands](#commands)
+- [AGENTS.md](#agentsmd)
+- [Agents](#agents)
+- [vs oh-my-openagent](#vs-oh-my-openagent)
+
 ## Philosophy
 
-Most OpenCode configs (like oh-my-opencode) give you a finished product.
+Most OpenCode configs (like oh-my-openagent) give you a finished product.
 You get power, but you don't understand what's happening or why.
 
 **kickstart.opencode does the opposite:**
@@ -21,59 +36,6 @@ You get power, but you don't understand what's happening or why.
 - It's a starting point, not a framework
 - You're expected to delete things you don't need
 - Uses only free models, plugins, and MCPs by default
-
-## How to make it yours
-
-1. Read `README.md` from top to bottom
-2. Read `opencode.jsonc` from top to bottom — it's annotated
-3. Create agents as needed
-4. Add custom commands for repetitive tasks
-
-## What this is NOT
-
-- Not a multi-agent orchestration system (that's oh-my-opencode)
-- Not a production-ready AI pipeline
-- Not something you use without reading
-
-## Relation to oh-my-opencode
-
-|            | kickstart.opencode | oh-my-opencode |
-| ---------- | ------------------ | -------------- |
-| Goal       | Understand & customize | Out of the box |
-| Complexity | Minimal            | High           |
-| Multi-agent| No (1-2)           | Yes (5+)       |
-| Token cost | Low                | High           |
-| Cost       | Free (default)     | Paid models    |
-| Best for  | Project start, learning | Later stage, heavy use |
-
-You can graduate to oh-my-opencode once you understand what you actually need.
-
-## Project structure
-
-```
-~/.config/opencode/
-│
-├── opencode.jsonc          ← Core config. Start here. Read every line.
-├── opencode.zh-cn.jsonc    ← Core config (Chinese)
-├── tui.jsonc               ← TUI config
-├── tui.zh-cn.jsonc         ← TUI config (Chinese)
-├── docs/
-│   ├── installation.md            ← Installation guide (for OpenCode)
-│   ├── installation-rtk.md        ← Install rtk (global-level, recommended)
-│   ├── installation-codegraph.md  ← Install codegraph (project-level, recommended)
-│   ├── installation-codebase-memory-mcp.md  ← Install codebase-memory-mcp (project-level, recommended)
-│   └── installation-superpowers.md  ← Install superpowers (project-level, recommended)
-├── agents/
-│   ├── careful.md         ← Agent that asks for confirmation
-│   └── expert.md          ← Escalation agent
-├── commands/
-│   ├── kickstart-config-mcp.md    ← Recommend and install MCP servers
-│   ├── kickstart-config-rule.md   ← Generate AGENTS.md interactively
-│   └── kickstart-config-skill.md  ← Recommend and install skills
-└── skills/
-    ├── kickstart-creator-skill/   ← Create and improve skills
-    └── kickstart-creator-command/ ← Create custom slash commands
-```
 
 ## Quick start
 
@@ -100,26 +62,92 @@ Then launch OpenCode:
 opencode
 ```
 
+## Project structure
+
+```
+~/.config/opencode/
+│
+├── opencode.jsonc          ← Core config. Start here. Read every line.
+├── opencode.zh-cn.jsonc    ← Core config (Chinese)
+├── tui.jsonc               ← TUI config
+├── tui.zh-cn.jsonc         ← TUI config (Chinese)
+├── AGENTS.md               ← Global AI instructions (you create this)
+├── docs/
+│   ├── installation.md            ← Installation guide (for OpenCode)
+│   ├── installation-rtk.md        ← Install rtk (global-level, recommended)
+│   ├── installation-codegraph.md  ← Install codegraph (project-level, recommended)
+│   ├── installation-codebase-memory-mcp.md  ← Install codebase-memory-mcp (project-level, recommended)
+│   └── installation-superpowers.md  ← Install superpowers (project-level, recommended)
+├── agents/
+│   ├── careful.md         ← Agent that asks for confirmation
+│   └── expert.md          ← Escalation agent
+├── commands/
+│   ├── kickstart-config-mcp.md    ← Recommend and install MCP servers
+│   ├── kickstart-config-rule.md   ← Generate AGENTS.md interactively
+│   └── kickstart-config-skill.md  ← Recommend and install skills
+└── skills/
+    ├── kickstart-creator-skill/   ← Create and improve skills
+    └── kickstart-creator-command/ ← Create custom slash commands
+```
+
+## How to make it yours
+
+1. **Read `README.md` from top to bottom** — understand the philosophy and what's available.
+2. **Read `opencode.jsonc` line by line** — it's annotated. Every config decision is explained.
+3. **Set up `AGENTS.md`** — add your language preference, working style, and coding conventions (see [AGENTS.md](#agentsmd) section for suggested content).
+4. **Install plugins you need** — start with `rtk` (token savings), then add project-level tools as needed (see [Plugins](#plugins) section).
+5. **Create agents and commands** as your workflow grows — you'll know when you need them.
+
+Delete anything you don't use. It's a starting point, not a framework.
+
+## What this is NOT
+
+- Not a multi-agent orchestration system (that's oh-my-openagent)
+- Not a production-ready AI pipeline
+- Not something you use without reading
+
 ## Plugins
 
-Plugins extend OpenCode's core behavior. Defined in `opencode.jsonc`.
+See [Plugins docs](https://opencode.ai/docs/plugins/) for how plugins work. Plugins extend OpenCode's core behavior and are defined in `opencode.jsonc`.
 
 ### rtk
 
 [rtk](https://github.com/rtk-ai/rtk) transparently rewrites verbose shell commands (`git status`, `pnpm list`, `vitest`, `cargo test`, …) into a compact token-saving form.
 
-**Install globally.** A single global install covers all projects with no per-project setup. To install, paste this prompt into OpenCode:
+**Install globally.** Paste this into OpenCode:
 
 ```
 Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-rtk.md
 ```
 
+### Superpowers
+
+[Superpowers](https://github.com/obra/superpowers) provides skills for brainstorming, debugging, TDD, planning, and more. Auto-loads per-task.
+
+**Install at the project level.** `cd` into the project directory first, then paste this into OpenCode:
+
+```
+Read the installation guide and follow it:
+https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-superpowers.md
+```
+
+## MCPs
+
+See [MCP docs](https://opencode.ai/docs/mcp-servers/) for how MCP servers work. The two below are built-in and available in every session by default:
+
+| MCP | Purpose |
+|-----|---------|
+| **context7** | Query up-to-date official library/framework documentation |
+| **searchcode** | Search and analyze public git repositories |
+
+You can also install these optional MCPs:
+
 ### codegraph
 
 [codegraph](https://github.com/colbymchenry/codegraph) pre-indexes your codebase as a knowledge graph, so the agent gets surgical context (call paths, blast radius, related symbols) in one query instead of crawling files.
 
-**Install at the project level, not globally.** Project-level install scopes the MCP server config and the `.codegraph/` index to projects that opt in. `cd` into the project directory first, then paste this prompt into OpenCode:
+**Install at the project level.** `cd` into the project directory first, then paste this into OpenCode:
 
 ```
 Read the installation guide and follow it:
@@ -130,31 +158,16 @@ https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/mai
 
 [codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) ships as a single static binary that indexes the codebase into a persistent SQLite-backed knowledge graph (158 languages, 14 MCP tools, sub-millisecond queries). Like codegraph, it gives the agent structural context in one call instead of crawling files.
 
-**Install at the project level, not globally.** The official installer auto-configures every detected agent; for kickstart.opencode we skip that and wire the MCP server per-project so only projects that opt in pay the index cost. `cd` into the project directory first, then paste this prompt into OpenCode:
+**Install at the project level.** `cd` into the project directory first, then paste this into OpenCode:
 
 ```
 Read the installation guide and follow it:
 https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-codebase-memory-mcp.md
 ```
 
-The project-specific guide adds an MCP entry to the project's `opencode.json` and an AGENTS.md block that tells the agent to prefer graph tools (`search_graph`, `trace_path`, `get_code_snippet`, `query_graph`, `get_architecture`) over grep/glob.
-
-### Superpowers
-
-Skills for brainstorming, debugging, TDD, planning, and more. Auto-loads per-task.
-
-**Install at project level, not global.** Global install loads the plugin on every session in every project, wasting tokens and pulling in behavior you may not want. `cd` into the project directory first, then paste this prompt into OpenCode:
-
-```
-Read the installation guide and follow it:
-https://raw.githubusercontent.com/orionpax1997/kickstart.opencode/refs/heads/main/docs/installation-superpowers.md
-```
-
-The project-specific guide includes an AGENTS.md override block to add to your project's `AGENTS.md`.
-
 ## Skills
 
-Skills are `SKILL.md` files placed in the `skills/` directory that inject domain-specific knowledge into AI, such as framework development standards or project-specific code patterns.
+See [Skills docs](https://opencode.ai/docs/skills/) for how to create your own. Skills are `SKILL.md` files placed in the `skills/` directory that inject domain-specific knowledge into AI — framework conventions, project-specific patterns, etc.
 
 ### Built-in skills
 
@@ -163,56 +176,24 @@ Skills are `SKILL.md` files placed in the `skills/` directory that inject domain
 | **kickstart-creator-skill** | Create new skills, iteratively improve them, and optimize skill descriptions |
 | **kickstart-creator-command** | Create custom slash commands with proper structure and best practices |
 
-Skills are loaded automatically based on the task context. You can also add project-specific skills when you understand your project's recurring needs.
+Skills are loaded automatically based on the task context. Add project-specific skills once you recognize recurring needs.
 
-See [Skills docs](https://opencode.ai/docs/skills/) for how to create your own.
+**Frontmatter fields:**
 
-## MCPs
-
-MCP servers are defined globally in `opencode.jsonc` and available in every session.
-
-| MCP | Purpose |
-|-----|---------|
-| **context7** | Query up-to-date official library/framework documentation |
-| **searchcode** | Search and analyze public git repositories |
-
-## AGENTS.md
-
-`AGENTS.md` is a global instruction file for AI, placed at `~/.config/opencode/AGENTS.md`, applies to all projects.
-
-**Suggested content:**
-
-**Language preference**
-```
-Reply in Chinese.
-```
-
-**MCP usage hints** (let AI know which tool to use when)
-```
-Use context7 to look up library and framework documentation.
-Use searchcode to search and analyze public git repositories.
-```
-
-**Personal coding preferences**
-```
-Never use `any` type. Never use `@ts-ignore`.
-Prefer explicit types over type inference.
-```
-
-**Working style**
-```
-Keep responses concise. No need to explain obvious steps.
-```
-
-Global `AGENTS.md` should stay short (under 10 lines), only include content that truly applies to all projects.
-
+```markdown
+---
+# Skill name (must match the directory name)
+name: my-skill
+# Description shown to the agent
+description: What this skill does
 ---
 
-Project-level `AGENTS.md` goes in project root, describing specific project structure, tech stack, development standards, etc. Run `/init` in OpenCode to have AI generate it based on your project.
+Skill instructions go here. Tell the AI what to do and when to use this skill.
+```
 
 ## Commands
 
-Create `.md` files in the `commands/` directory to define slash commands. Users trigger them in TUI by typing `/filename`.
+See [Commands docs](https://opencode.ai/docs/commands/) for how they work. Commands are user-triggered shortcuts for repetitive tasks (unlike skills, which the agent loads automatically). Create `.md` files in the `commands/` directory to define slash commands. Users trigger them in TUI by typing `/filename`.
 
 **Frontmatter fields:**
 
@@ -231,27 +212,36 @@ Can reference files: @path/to/file
 Can run shell: !`git status`
 ```
 
-### /kickstart-config-mcp
+### Built-in commands
 
-Recommend and install MCP servers based on your project's tech stack. Searches PulseMCP (12,000+ servers) and MCP Market (20,000+ servers), presents a comparison table, and writes the chosen servers directly into the `mcp` block of `opencode.jsonc`.
+| Command | Description |
+|---------|-------------|
+| **/kickstart-config-mcp** | Recommend and install MCP servers based on your tech stack |
+| **/kickstart-config-rule** | Interactive AGENTS.md generator — detects tech stack, asks preferences, writes minimal AGENTS.md |
+| **/kickstart-config-skill** | Recommend and install skills from the open agent skills ecosystem |
 
-### /kickstart-config-rule
-
-Interactive AGENTS.md generator. Auto-detects tech stack, asks about language preference and working style, then writes a minimal `AGENTS.md` (under 100 lines) containing only what the AI can't discover from code.
-
-### /kickstart-config-skill
-
-Recommend and install skills from skills.sh based on your project's tech stack. Searches the open agent skills ecosystem and installs selected skills globally or per-project.
-
-**Creating your own commands:**
+### Creating your own commands
 
 - Have repetitive code review flows? Make a command, trigger with `/review`
 - Frequently need to generate certain document formats? Make a command with templates
 - Need fixed commit message format? Make a command that reads git diff and generates
 
+## AGENTS.md
+
+See [AGENTS.md docs](https://opencode.ai/docs/rules/) for the full specification. `AGENTS.md` is a global instruction file for AI, placed at `~/.config/opencode/AGENTS.md`, applies to all projects. Keep it short (under 10 lines) — only include what truly applies everywhere.
+
+**Suggested content:**
+
+- **Language preference** — e.g. `Reply in Chinese.`
+- **MCP usage hints** — e.g. `Use context7 to look up library and framework documentation.`
+- **Personal coding preferences** — e.g. `Never use any type. Prefer explicit types.`
+- **Working style** — e.g. `Keep responses concise. No need to explain obvious steps.`
+
+Project-level `AGENTS.md` goes in project root, describing project structure, tech stack, development standards, etc. Run `/kickstart-config-rule` in OpenCode to generate a concise version based on your project. (Avoid `/init` — it produces overly long output.)
+
 ## Agents
 
-Create `.md` files in the `agents/` directory to define agents. Each file consists of frontmatter and an optional system prompt.
+See [Agents docs](https://opencode.ai/docs/agents/) for how they work. Create `.md` files in the `agents/` directory to define agents. Each file consists of frontmatter and an optional system prompt.
 
 **Frontmatter fields:**
 
@@ -279,7 +269,7 @@ Leave empty to inherit default build system prompt.
 
 ### careful (built-in example)
 
-`careful` is a primary agent that behaves exactly like the default `build` agent, except it asks for confirmation before editing files or running shell commands. Use it when you want full control over every AI action.
+`careful` is a primary agent that behaves like the default `build`, except it asks for confirmation before editing files or running shell commands. Use it when you want full control over every AI action.
 
 ```markdown
 ---
@@ -292,33 +282,39 @@ permission:
 ---
 ```
 
-The [manifesto](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/manifesto.md) from oh-my-opencode argues that requiring human intervention is essentially a sign of system failure — ideally, you just describe your intent and let AI handle the rest. `careful` is designed for the "not yet" phase: when you don't fully trust AI's judgment yet, use confirmation as a checkpoint. As models improve and your trust builds, you may find yourself switching to `careful` less and less, eventually letting it run freely.
+The [oh-my-openagent manifesto](https://github.com/code-yeongyu/oh-my-openagent/blob/dev/docs/manifesto.md) argues that requiring human intervention is a sign of system failure — ideally, you describe your intent and let AI handle the rest. `careful` is for the "not yet" phase: use confirmation as a checkpoint while you build trust. As models improve, you'll switch to it less and less.
 
 ### expert (escalation agent)
 
-`expert` is a subagent used as an explicit escalation target. It shares build's toolset but runs on its own model with maximum permissions, so the caller (a subagent stuck in a loop, or the user directly) can hand off a `BLOCKED` task with a `fix_hint` and get a fresh attempt without restarting.
+`expert` is a subagent that runs on its own model with maximum permissions, designed as an explicit escalation target.
 
 ```markdown
 ---
-description: Escalation agent. Same as build but with maximum permissions and independent model configuration. Invoke ONLY via explicit subagent_type: expert, manual switch (Shift+Tab), or Orchestrator escalation when a task is BLOCKED.
 mode: all
 model: opencode/big-pickle
 ---
 ```
 
-**When to invoke it**
+**When to use it:**
 
-- **Manual switch** — press Shift+Tab in the TUI to switch to `expert` and chat with it directly. Typical use: brainstorming, planning, and setting task goals, where you want a stronger model's reasoning without burning a subagent slot on the actual implementation.
-- **Subagent escalation** — another agent (typically an Orchestrator implementing the superpowers `BLOCKED` pattern) calls the `task` tool with `subagent_type: expert` and a `fix_hint` describing what went wrong.
-- **Explicit instruction** — the user message names `expert` or asks for escalation.
+- **Manual switch** — press Shift+Tab in the TUI to switch to `expert` and chat directly. Typical use: brainstorming, planning, or setting task goals, where you want a stronger model's reasoning without burning a subagent slot on the actual implementation.
+- **Subagent escalation** — another agent calls the `task` tool with `subagent_type: expert` and a `fix_hint` describing what went wrong.
 
-**When NOT to invoke it**
+Don't use for routine multi-step tasks — that's what the built-in task agent is for. `expert` is not a "more powerful build"; its description gates auto-selection.
 
-- Routine multi-step work. That belongs to the built-in `general` task agent.
-- As a "more powerful build". `expert` is not a default worker; its description gates auto-selection, and the parent model should not route everyday tasks to it.
-
-**Creating your own agents:**
+### Creating your own agents
 
 - Need a read-only code review agent? Set `write: deny` `edit: deny`
 - Need a domain-specific agent? Describe the role and focus in system prompt
 - Need to use a specific model? Add `model: provider/model-id` in frontmatter
+
+## vs oh-my-openagent
+
+|            | kickstart.opencode | oh-my-openagent |
+| ---------- | ------------------ | -------------- |
+| Goal       | Understand & customize | Out of the box |
+| Complexity | Minimal            | High           |
+| Multi-agent| No (1-2)           | Yes (5+)       |
+| Token cost | Low                | High           |
+| Cost       | Free (default)     | Paid models    |
+| Best for  | Project start, learning | Later stage, heavy use |
